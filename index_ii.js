@@ -1,3 +1,6 @@
+const startupDebugger = require('debug')('app:startup')
+const dbDebugger = require('debug')('app:db')
+
 const config = require('config')
 const Joi = require('joi')
 const logger = require('./logger')
@@ -20,8 +23,11 @@ console.log('Mail Password: ' + config.get('mail.password'))
 
 if (app.get('env') === 'development') {
     app.use(morgan('tiny'))
-    console.log('Morgan enabled')
+    startupDebugger('Morgan enabled')
 }
+
+//Db work 
+dbDebugger('Connected to the database...')
 
 app.use(express.json())
 
